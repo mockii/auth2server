@@ -1,0 +1,6 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+.idea/
+target/
+*.iml
+.DS_Store
