@@ -22,9 +22,13 @@ import java.util.List;
 @Service
 public class AccountUserDetailsService implements UserDetailsService {
 
-    @Qualifier("appDataSource")
+    /*@Qualifier("appDataSource")
     @Autowired
-    private DataSource appDataSource;
+    private DataSource appDataSource;*/
+
+    @Qualifier("authDataSource")
+    @Autowired
+    private DataSource authDataSource;
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
@@ -34,7 +38,7 @@ public class AccountUserDetailsService implements UserDetailsService {
     }
 
     private Account getAccount(String userName) {
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(appDataSource);
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(authDataSource);
         String query = "SELECT * FROM auth_mockii.USERS WHERE USER_NAME = ?";
         Object objects[] = {userName};
         List<Account> list = jdbcTemplate.query(query, objects,
